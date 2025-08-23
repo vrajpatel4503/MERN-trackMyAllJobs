@@ -5,7 +5,7 @@ import { showErrorToast, showSuccessToast } from "../../util/ToastIfyUtils";
 import Loader from "../Loader/Loader";
 import { IoArrowBack } from "react-icons/io5";
 
-const API_URl = import.meta.env.VITE_API_URL;
+const API_URl = import.meta.env.VITE_API_URL || "/api"
 
 const ViewJob = () => {
   const { jobId } = useParams();
@@ -26,7 +26,7 @@ const ViewJob = () => {
     const fetchJob = async () => {
       try {
         const res = await axios.get(
-          `${API_URl}/job/get-single-job/${jobId}`,
+          `${API_URl}/api/v1/job/get-single-job/${jobId}`,
           { withCredentials: true }
         );
 
@@ -46,7 +46,7 @@ const ViewJob = () => {
   const handleDelete = async () => {
     try {
       const res = await axios.delete(
-        `${API_URl}/job/delete-job/${jobId}`,
+        `${API_URl}/api/v1/job/delete-job/${jobId}`,
         { withCredentials: true }
       );
       showSuccessToast(res.data.message || "Job successfully deleted");

@@ -6,7 +6,7 @@ import Loader from "../Loader/Loader";
 import { useNavigate } from "react-router-dom";
 import { IoArrowBack } from "react-icons/io5";
 
-const API_URl = import.meta.env.VITE_API_URL;
+const API_URl = import.meta.env.VITE_API_URL || "/api"
 
 const AddedNewJob = () => {
   const navigate = useNavigate();
@@ -42,7 +42,7 @@ const AddedNewJob = () => {
       setLoading(true);
 
       const res = await axios.post(
-        `${API_URl}/job/create-new-job`,
+        `${API_URl}/api/v1/job/create-new-job`,
         data,
         { withCredentials: true }
       );

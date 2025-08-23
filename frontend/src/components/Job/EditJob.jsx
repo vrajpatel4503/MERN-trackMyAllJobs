@@ -7,7 +7,7 @@ import { showErrorToast, showSuccessToast } from "../../util/ToastIfyUtils";
 import Loader from "../Loader/Loader";
 import { IoArrowBack } from "react-icons/io5";
 
-const API_URl = import.meta.env.VITE_API_URL;
+const API_URl = import.meta.env.VITE_API_URL || "/api"
 
 const EditJob = () => {
   const { jobId } = useParams();
@@ -40,7 +40,7 @@ const EditJob = () => {
     const fetchJobDetails = async () => {
       try {
         const res = await axios.get(
-          `${API_URl}/job/get-single-job/${jobId}`,
+          `${API_URl}/api/v1/job/get-single-job/${jobId}`,
 
           { withCredentials: true }
         );
@@ -83,7 +83,7 @@ const EditJob = () => {
     e.preventDefault();
     try {
       const res = await axios.patch(
-        `${API_URl}/job/edit-job-field/${jobId}`,
+        `${API_URl}/api/v1/job/edit-job-field/${jobId}`,
         data,
         { withCredentials: true }
       );

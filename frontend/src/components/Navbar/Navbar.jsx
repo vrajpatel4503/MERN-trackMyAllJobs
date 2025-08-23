@@ -7,7 +7,7 @@ import { showErrorToast, showSuccessToast } from "../../util/ToastIfyUtils";
 import { MdOutlineMenu } from "react-icons/md";
 import { IoCloseSharp } from "react-icons/io5";
 
-const API_URl = import.meta.env.VITE_API_URL;
+const API_URl = import.meta.env.VITE_API_URL || "/api"
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await axios.get(`${API_URl}/user/logout`, {
+      const res = await axios.get(`${API_URl}/api/v1/user/logout`, {
         withCredentials: true,
       });
 

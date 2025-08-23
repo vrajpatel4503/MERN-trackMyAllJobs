@@ -4,7 +4,7 @@ import { showErrorToast, showSuccessToast } from "../util/ToastIfyUtils.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader/Loader.jsx";
 
-const API_URl = import.meta.env.VITE_API_URL;
+const API_URl = import.meta.env.VITE_API_URL || "/api"
 
 const Register = () => {
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ const Register = () => {
       }
 
       const res = await axios.post(
-        `${API_URl}/user/register`,
+        `${API_URl}/api/v1/user/register`,
         formDataToSubmit
       );
 

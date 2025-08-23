@@ -26,5 +26,9 @@ app.use(express.urlencoded({ extended: true })); //Parses incoming requests with
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/job", jobRoutes);
 
+app.get("/", (req, res) => {
+  res.send("Backend is running...");
+});
+
 // ----- export default app ---------
 export default app;
