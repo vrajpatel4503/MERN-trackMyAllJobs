@@ -6,6 +6,8 @@ import { useDispatch } from "react-redux";
 import { authActions } from "../store/authSlice.js";
 import Loader from "../components/Loader/Loader.jsx";
 
+const API_URl = import.meta.env.VITE_API_URL;
+
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -34,7 +36,7 @@ const Login = () => {
 
     try {
       const res = await axios.post(
-        `http://localhost:8000/api/v1/user/login`,
+        `${API_URl}/user/login`,
         {
           email: formData.email,
           password: formData.password,

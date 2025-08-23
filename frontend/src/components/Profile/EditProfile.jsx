@@ -5,6 +5,8 @@ import { showErrorToast, showSuccessToast } from "../../util/ToastIfyUtils";
 import DeleteAccount from "./DeleteAccount";
 import Loader from "../Loader/Loader";
 
+const API_URl = import.meta.env.VITE_API_URL;
+
 const EditProfile = () => {
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -14,7 +16,7 @@ const EditProfile = () => {
     const fetchUserDetails = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/user/get-user-details`,
+          `${API_URl}/user/get-user-details`,
           { withCredentials: true }
         );
 
@@ -39,7 +41,7 @@ const EditProfile = () => {
   const handleEmailSubmit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/v1/user/update-email`,
+        `${API_URl}/user/update-email`,
         { email },
         { withCredentials: true }
       );
@@ -58,7 +60,7 @@ const EditProfile = () => {
   const handlePhoneSubmit = async () => {
     try {
       const res = await axios.put(
-        `http://localhost:8000/api/v1/user/update-phoneNumber`,
+        `${API_URl}/user/update-phoneNumber`,
         { phoneNumber },
         { withCredentials: true }
       );

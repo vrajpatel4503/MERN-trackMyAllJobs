@@ -5,6 +5,8 @@ import { useDispatch } from "react-redux";
 import { showErrorToast, showSuccessToast } from "../../util/ToastIfyUtils";
 import { authActions } from "../../store/authSlice.js";
 
+const API_URl = import.meta.env.VITE_API_URL;
+
 const DeleteAccount = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -18,7 +20,7 @@ const DeleteAccount = () => {
 
     try {
       const res = await axios.delete(
-        `http://localhost:8000/api/v1/user/delete-user-account`,
+        `${API_URl}/user/delete-user-account`,
         {
           withCredentials: true,
         }

@@ -6,9 +6,15 @@ import { dbConnection } from "./db/dbConnection.js";
 dotenv.config();
 
 // -------- Database connection ---------
-dbConnection()
+dbConnection();
 
 const port = process.env.PORT || 8000;
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+
+// Run normally on localhost
+if (!process.env.VERCEL) {
+  app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
+  });
+}
+
+export default app;

@@ -4,6 +4,8 @@ import { showErrorToast } from "../../util/ToastIfyUtils";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 
+const API_URl = import.meta.env.VITE_API_URL;
+
 const ProfileCard = () => {
   const navigate = useNavigate();
 
@@ -14,7 +16,7 @@ const ProfileCard = () => {
     const fetchUserDetails = async () => {
       try {
         const res = await axios.get(
-          `http://localhost:8000/api/v1/user/get-user-details`,
+          `${API_URl}/user/get-user-details`,
           {
             withCredentials: true,
           }

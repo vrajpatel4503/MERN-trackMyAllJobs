@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { showErrorToast } from "../../util/ToastIfyUtils";
 
+const API_URl = import.meta.env.VITE_API_URL;
+
 const JobBox = () => {
   const navigate = useNavigate();
   const [jobs, setJobs] = useState([]);
@@ -13,7 +15,7 @@ const JobBox = () => {
   const fetchJobs = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:8000/api/v1/job/get-all-job",
+        `${API_URl}/job/get-all-job`,
         {
           withCredentials: true, 
         }
