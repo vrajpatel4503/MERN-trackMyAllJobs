@@ -11,14 +11,10 @@ const app = express();
 // ==================== middleware =======================
 
 // =========== Cors ============
-const allowedOrigins = process.env.FRONTEND_URL
-  ? process.env.FRONTEND_URL.split(",")
-  : ["http://localhost:5173"];
-
-  console.log("Frontend URl : ", process.env.FRONTEND_URL)
-
-  console.log("Allowed origins:", allowedOrigins);
-
+const allowedOrigins = [
+  process.env.FRONTEND_URL_LOCAL,
+  process.env.FRONTEND_URL_PROD,
+].filter(Boolean); // remove undefined if any
 
 const corsOptions = {
   origin: (origin, callback) => {
@@ -31,6 +27,8 @@ const corsOptions = {
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
+
+console.log("Allowed origins:", allowedOrigins);
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
