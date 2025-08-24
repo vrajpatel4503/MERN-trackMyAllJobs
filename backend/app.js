@@ -12,7 +12,7 @@ const app = express();
 
 // =========== Cors ============
 const allowedOrigins = process.env.FRONTEND_URLS
-  ? process.env.FRONTEND_URLS.split(",")
+  ? process.env.FRONTEND_URL.split(",")
   : ["http://localhost:5173"];
 
 const corsOptions = {
@@ -24,9 +24,11 @@ const corsOptions = {
     }
   },
   credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
 };
 
 app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 
 app.use(express.json()); // Parses incoming JSON payloads in req.body, useful for APIs receiving JSON data.
 
