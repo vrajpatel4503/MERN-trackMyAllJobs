@@ -9,9 +9,21 @@ import jobRoutes from "./routes/job.routes.js";
 const app = express();
 
 // ==================== middleware =======================
+
+// =========== Cors ============
+const allowedOrigins = process.env.FRONTEND_URLS
+  ? process.env.FRONTEND_URLS.split(",")
+  : ["http://localhost:5173"];
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL|| "http://localhost:5173", // Allow only frontend URL
-  credentials: true, // Allow credentials (cookies)
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
 };
 
 app.use(cors(corsOptions));
