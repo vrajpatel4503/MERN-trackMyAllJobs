@@ -15,6 +15,9 @@ const allowedOrigins = process.env.FRONTEND_URLS
   ? process.env.FRONTEND_URL.split(",")
   : ["http://localhost:5173"];
 
+  console.log("Allowed origins:", allowedOrigins);
+
+
 const corsOptions = {
   origin: (origin, callback) => {
     if (!origin || allowedOrigins.includes(origin)) {
