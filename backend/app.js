@@ -11,9 +11,11 @@ const app = express();
 // ==================== middleware =======================
 
 // =========== Cors ============
-const allowedOrigins = process.env.FRONTEND_URLS
+const allowedOrigins = process.env.FRONTEND_URL
   ? process.env.FRONTEND_URL.split(",")
   : ["http://localhost:5173"];
+
+  console.log("Frontend URl : ", process.env.FRONTEND_URL)
 
   console.log("Allowed origins:", allowedOrigins);
 
