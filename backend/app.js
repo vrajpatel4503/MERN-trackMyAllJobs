@@ -39,6 +39,12 @@ app.use(cookieParser()); // Parses cookies attached to the client request and ma
 
 app.use(express.urlencoded({ extended: true })); //Parses incoming requests with URL-encoded data (e.g., form submissions). The extended: true allows nested objects.
 
+//  Temporary route to check Node.js version
+app.get("/node-version", (req, res) => {
+  res.json({ node: process.version });
+});
+
+
 // ============== Routes declaration ====================
 app.use("/api/v1/user", userRoutes);
 app.use("/api/v1/job", jobRoutes);
