@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ViewJob from "../Job/ViewJob";
 import { useNavigate } from "react-router-dom";
 import Loader from "../Loader/Loader";
 import { showErrorToast } from "../../util/ToastIfyUtils";
@@ -14,15 +13,12 @@ const JobBox = () => {
 
   const fetchJobs = async () => {
     try {
-      const res = await axios.get(
-        `${API_URl}/api/v1/job/get-all-job`,
-        {
-          withCredentials: true, 
-        }
-      );
+      const res = await axios.get(`${API_URl}/api/v1/job/get-all-job`, {
+        withCredentials: true,
+      });
       setJobs(res.data.jobs || []);
     } catch (error) {
-      showErrorToast(error.response?.data?.message || "Failed to fetch job")
+      showErrorToast(error.response?.data?.message || "Failed to fetch job");
     } finally {
       setLoading(false);
     }
@@ -32,7 +28,15 @@ const JobBox = () => {
     fetchJobs();
   }, []);
 
-  if (loading) return <p className="p-4"></p>;
+  if (loading) return <p className="p-4"><Loader /></p>;
+
+  // ✅ helper to format status
+  const formatStatus = (status) => {
+    if (!status) return "--";
+    return status
+      .replace(/_/g, " ") // replace underscores with spaces
+      .replace(/\b\w/g, (c) => c.toUpperCase()); // capitalize each word
+  };
 
   return (
     <div className="overflow-x-auto rounded-xl shadow-md border mt-4">
@@ -63,7 +67,7 @@ const JobBox = () => {
                 <td className="px-4 py-2">
                   {new Date(job.appliedDate).toLocaleDateString()}
                 </td>
-                <td className="px-4 py-2"> {job.status.charAt(0).toUpperCase() + job.status.slice(1)}</td>
+                <td className="px-4 py-2">{formatStatus(job.status)}</td>
                 <td className="px-4 py-2">
                   <button
                     className="text-blue-600 hover:underline"

@@ -14,9 +14,7 @@ const generateRefreshTokenAndAccessToken = async (userId) => {
     return { accessToken, refreshToken };
 
     // try part end
-  } catch (error) {
-   
-  }
+  } catch (error) {}
 };
 
 // Controller : User Registration
@@ -55,11 +53,18 @@ export const userRegistrationController = async (req, res) => {
     // Upload avatar to Cloudinary from buffer
     const avatarBuffer = req.files.avatar[0].buffer;
 
-    // Upload avatar to cloudinary and hash password
-    const [hashedPassword, avatarUpload] = await Promise.all([
-      bcryptjs.hash(password, 10),
-      uploadOnCloudinary(avatarBuffer, "avatars"),
-    ]);
+    let hashedPassword, avatarUpload;
+    try {
+      [hashedPassword, avatarUpload] = await Promise.all([
+        bcryptjs.hash(password, 8),
+        uploadOnCloudinary(avatarBuffer, "avatars"),
+      ]);
+    } catch (err) {
+      return res.status(500).json({
+        success: false,
+        message: "Failed to process your request. Please try again.",
+      });
+    }
 
     if (!avatarUpload?.secure_url || !avatarUpload?.public_id) {
       return res.status(500).json({
@@ -84,7 +89,7 @@ export const userRegistrationController = async (req, res) => {
     try {
       await user.save();
     } catch (err) {
-      await cloudinary.uploader.destroy(avatarUpload.public_id); // clean up
+      await cloudinary.uploader.destroy(avatarUpload.public_id);
       return res.status(500).json({
         success: false,
         message: "User registration failed. Please try again.",
@@ -106,7 +111,7 @@ export const userRegistrationController = async (req, res) => {
   } catch (error) {
     return res.status(500).json({
       success: false,
-      message: "Internal server error",
+      message: "Something went wrong on the server. Please try again later.",
     });
   }
 };
@@ -152,7 +157,7 @@ export const userLoginController = async (req, res) => {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-      maxAge: 7 * 24 * 60 * 60 * 1000
+      maxAge: 7 * 24 * 60 * 60 * 1000,
     };
 
     return res

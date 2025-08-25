@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import axios from "axios";
 import { showErrorToast, showSuccessToast } from "../util/ToastIfyUtils.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import Loader from "../components/Loader/Loader.jsx";
 
-const API_URl = import.meta.env.VITE_API_URL || "/api"
+const API_URl = import.meta.env.VITE_API_URL || "/api";
 
 const Register = () => {
   const navigate = useNavigate();
@@ -30,13 +30,36 @@ const Register = () => {
     }));
   };
 
+  // inside Register component
+  const fileInputRef = useRef(null);
+
   // handle avatar change
   const handleFileChange = (e) => {
     const { name, files } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: files[0],
-    }));
+    if (files && files[0]) {
+      const file = files[0];
+
+      if (file.size > 200 * 1024) {
+        showErrorToast("Please upload an avatar that does not exceed 200 KB.");
+
+        // clear file from state
+        setFormData((prev) => ({
+          ...prev,
+          [name]: null,
+        }));
+
+        // clear the file input visually
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+        return;
+      }
+
+      setFormData((prev) => ({
+        ...prev,
+        [name]: file,
+      }));
+    }
   };
 
   // handle Submit
@@ -68,6 +91,7 @@ const Register = () => {
         navigate("/login");
       }, 2000);
     } catch (error) {
+      console.log(error);
       showErrorToast(
         error.response?.data?.message || "Failed to register. Please try again"
       );
@@ -157,9 +181,13 @@ const Register = () => {
               <label className="block font-medium mb-1 text-black">
                 Avatar
               </label>
+              <p className="text-sm mb-1">
+                Note :- Please upload an image within 200 KB
+              </p>
               <input
                 type="file"
                 name="avatar"
+                ref={fileInputRef}
                 onChange={handleFileChange}
                 accept="image/*"
                 className="w-full px-3 text-black py-2 border border-gray-300 rounded-md focus:outline-none"
