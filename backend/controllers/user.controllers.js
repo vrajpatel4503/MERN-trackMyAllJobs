@@ -150,8 +150,9 @@ export const userLoginController = async (req, res) => {
 
     const options = {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
+      maxAge: 7 * 24 * 60 * 60 * 1000
     };
 
     return res
@@ -184,8 +185,8 @@ export const userLogoutController = async (req, res) => {
 
     const options = {
       httpOnly: true,
-      secure: false,
-      sameSite: "Lax",
+      secure: true,
+      sameSite: "none",
     };
 
     return res
