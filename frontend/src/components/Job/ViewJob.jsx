@@ -131,14 +131,14 @@ const ViewJob = () => {
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Company Phone Number</p>
-            <p className="text-gray-900 text-right">
+            <p className="text-gray-900 text-right font-semibold">
               {job.hrPhoneNumber || "--"}
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Company Website</p>
-            <p className="text-gray-900 text-right break-all">
+            <p className="text-gray-900 text-right break-all font-semibold">
               {job.companyWebsite || "--"}
             </p>
           </div>
