@@ -14,7 +14,7 @@ const ViewJob = () => {
   const [loading, setLoading] = useState(true);
 
   const statusCode = {
-    apply_by_email: "bg-yellow-500",
+    apply_by_email: "bg-yellow-300",
     apply_by_onwebsite: "bg-yellow-500",
     interview: "bg-blue-500",
     rejected: "bg-red-600",
@@ -72,6 +72,14 @@ const ViewJob = () => {
       </p>
     );
 
+     //  Function to format status
+  const formatStatus = (status) => {
+    if (!status) return "--";
+    return status
+      .replace(/_/g, " ") // replace underscores with spaces
+      .replace(/\b\w/g, (c) => c.toUpperCase()); // capitalize each word
+  };
+
   return (
     <>
       {/* Back Button */}
@@ -87,36 +95,36 @@ const ViewJob = () => {
 
       {/* Job Details Card */}
       <div className="max-w-2xl mx-4 sm:mx-auto my-10 bg-white p-6 sm:p-8 rounded-xl shadow-md border">
-        <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-8 text-gray-800">
+        <h1 className="text-2xl sm:text-3xl font-semibold text-center mb-8 text-black">
           Job Application Details
         </h1>
 
         <div className="divide-y divide-gray-300 text-sm sm:text-base">
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Position Applied</p>
-            <p className="text-gray-900 text-right">{job.positionApplied}</p>
+            <p className="text-gray-900 text-right font-semibold">{job.positionApplied}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Company Name</p>
-            <p className="text-gray-900 text-right">{job.companyName}</p>
+            <p className="text-gray-900 text-right font-semibold">{job.companyName}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">HR Email</p>
-            <p className="text-gray-900 text-right">{job.hrEmail || "--"}</p>
+            <p className="text-gray-900 text-right font-semibold">{job.hrEmail || "--"}</p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Company City</p>
-            <p className="text-gray-900 text-right">
+            <p className="text-gray-900 text-right font-semibold">
               {job.companyCity || "--"}
             </p>
           </div>
 
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2">
             <p className="text-gray-600 font-bold">Applied Date</p>
-            <p className="text-gray-900 text-right">
+            <p className="text-gray-900 text-right font-semibold">
               {new Date(job.appliedDate).toLocaleDateString()}
             </p>
           </div>
@@ -138,11 +146,11 @@ const ViewJob = () => {
           <div className="flex flex-col sm:flex-row justify-between py-4 gap-2 items-center">
             <p className="text-gray-600 font-bold">Application Status</p>
             <span
-              className={`px-4 py-1 text-sm rounded-full text-white font-medium capitalize ${
+              className={`px-4 py-2 text-sm rounded-full  text-black font-semibold capitalize ${
                 statusCode[job.status] || "bg-gray-500"
               }`}
             >
-              {job.status}
+              {formatStatus(job.status)}
             </span>
           </div>
         </div>

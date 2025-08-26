@@ -20,7 +20,7 @@ const AddedNewJob = () => {
     positionApplied: "",
     companyCity: "",
     appliedDate: "",
-    status: "applied",
+    status: "apply_by_email",
   });
 
   const [loading, setLoading] = useState(false);
@@ -66,6 +66,7 @@ const AddedNewJob = () => {
 
       // try part end
     } catch (error) {
+      console.log(error)
       setLoading(false);
       showErrorToast(error.response?.data?.message || "Failed to add new job");
     }

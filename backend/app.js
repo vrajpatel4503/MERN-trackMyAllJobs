@@ -26,10 +26,8 @@ const corsOptions = {
   },
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-  optionSuccessStatus:200,
+  optionSuccessStatus: 200,
 };
-
-console.log("Allowed origins:", allowedOrigins);
 
 app.use(cors(corsOptions));
 app.options("*", cors(corsOptions));
@@ -39,12 +37,6 @@ app.use(express.json()); // Parses incoming JSON payloads in req.body, useful fo
 app.use(cookieParser()); // Parses cookies attached to the client request and makes them available under req.cookies.
 
 app.use(express.urlencoded({ extended: true })); //Parses incoming requests with URL-encoded data (e.g., form submissions). The extended: true allows nested objects.
-
-//  Temporary route to check Node.js version
-app.get("/node-version", (req, res) => {
-  res.json({ node: process.version });
-});
-
 
 // ============== Routes declaration ====================
 app.use("/api/v1/user", userRoutes);

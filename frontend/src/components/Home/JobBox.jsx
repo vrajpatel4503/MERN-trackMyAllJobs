@@ -30,7 +30,7 @@ const JobBox = () => {
 
   if (loading) return <p className="p-4"><Loader /></p>;
 
-  // ✅ helper to format status
+  //  Function to format status
   const formatStatus = (status) => {
     if (!status) return "--";
     return status

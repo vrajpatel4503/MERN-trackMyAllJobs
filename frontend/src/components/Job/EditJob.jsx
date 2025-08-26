@@ -282,7 +282,7 @@ const EditJob = () => {
                   className="w-full px-3 text-black py-2 border border-gray-300 rounded-md focus:outline-none"
                   required
                 >
-                  <option value="apply_by_email">Apply By Email</option>
+                  <option value="apply_by_email">Apply by Email</option>
                   <option value="apply_by_onwebsite">Apply on Website</option>
                   <option value="interview">Interview</option>
                   <option value="rejected">Rejected</option>
