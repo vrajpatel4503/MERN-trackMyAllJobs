@@ -15,11 +15,11 @@ const ViewJob = () => {
 
   const statusCode = {
     apply_by_email: "bg-yellow-300",
-    apply_by_onwebsite: "bg-yellow-500",
-    interview: "bg-blue-500",
-    rejected: "bg-red-600",
-    offer: "bg-green-600",
-    save_later: "bg-gray-500",
+    apply_by_onwebsite: "bg-yellow-300",
+    interview: "bg-blue-300",
+    rejected: "bg-red-300",
+    offer: "bg-green-300",
+    save_later: "bg-gray-300",
   };
 
   useEffect(() => {
