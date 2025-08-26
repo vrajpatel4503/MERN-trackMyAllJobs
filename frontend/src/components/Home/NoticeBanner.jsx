@@ -12,7 +12,7 @@ const NoticeBanner = () => {
       <div className="flex items-center gap-2">
         <IoAlertCircle className="w-5 h-5 text-yellow-700" />
         <p className="text-sm md:text-base">
-          ⚠️ <b>Important:</b> Please <b>do not refresh the page after login</b> — it may cause an error.  
+          ⚠️ <b>Important:</b> Please <b>do not refresh the page</b> — it may cause an error.  
           If it happens, click 👉{" "}
           <a
             href="https://mern-track-my-all-jobs.vercel.app/"
